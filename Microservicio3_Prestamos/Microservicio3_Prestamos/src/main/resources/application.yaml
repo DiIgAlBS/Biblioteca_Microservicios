@@ -1,0 +1,42 @@
+# ==========================================
+# PUERTO DEL MICROSERVICIO (ASIGNACIÓN DINÁMICA)
+# ==========================================
+server:
+  port: 0 # ¡El 0 le indica a Spring Boot que elija un puerto libre al azar!
+
+spring:
+  application:
+    name: Microservicio3_Prestamos
+    
+  # ==========================================
+  # CONFIGURACIÓN DE BASE DE DATOS MYSQL
+  # ==========================================
+  datasource:
+    url: jdbc:mysql://localhost:3306/prestamos_db2?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # ==========================================
+  # CONFIGURACIÓN DE JPA Y FLYWAY
+  # ==========================================
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+# ==========================================
+# CONFIGURACIÓN DE EUREKA CLIENT
+# ==========================================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  # 🌟 Agregamos esto para que en el panel de Eureka se vea un ID único por cada puerto aleatorio
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
