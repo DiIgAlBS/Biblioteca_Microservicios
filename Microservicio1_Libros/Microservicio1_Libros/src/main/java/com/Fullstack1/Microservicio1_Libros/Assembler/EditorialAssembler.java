@@ -32,24 +32,24 @@ public class EditorialAssembler extends RepresentationModelAssemblerSupport<Edit
                 .correoContacto(entity.getCorreoContacto())
                 .build();
         
-        // Agregar links HATEOAS
+   
         try {
-            // Link self (obtener esta editorial)
+       
             dto.add(linkTo(methodOn(EditorialController.class)
                     .obtenerPorId(entity.getId()))
                     .withSelfRel());
             
-            // Link a todas las editoriales
+         
             dto.add(linkTo(methodOn(EditorialController.class)
                     .obtenerTodos())
                     .withRel("editoriales"));
             
-            // Link para actualizar
+       
             dto.add(linkTo(methodOn(EditorialController.class)
                     .actualizar(entity.getId(), null))
                     .withRel("actualizar"));
             
-            // Link para eliminar
+         
             dto.add(linkTo(methodOn(EditorialController.class)
                     .eliminar(entity.getId()))
                     .withRel("eliminar"));

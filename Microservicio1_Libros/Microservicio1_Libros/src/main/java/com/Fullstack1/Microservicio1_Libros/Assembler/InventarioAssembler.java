@@ -32,24 +32,24 @@ public class InventarioAssembler extends RepresentationModelAssemblerSupport<Inv
                 .servicioStockAlmacen(entity.getServicioStockAlmacen())
                 .build();
         
-        // Agregar links HATEOAS
+   
         try {
-            // Link self (obtener este inventario)
+        
             dto.add(linkTo(methodOn(InventarioController.class)
                     .obtenerPorId(entity.getId()))
                     .withSelfRel());
             
-            // Link a todos los inventarios
+         
             dto.add(linkTo(methodOn(InventarioController.class)
                     .obtenerTodos())
                     .withRel("inventarios"));
             
-            // Link para actualizar
+     
             dto.add(linkTo(methodOn(InventarioController.class)
                     .actualizar(entity.getId(), null))
                     .withRel("actualizar"));
             
-            // Link para eliminar
+       
             dto.add(linkTo(methodOn(InventarioController.class)
                     .eliminar(entity.getId()))
                     .withRel("eliminar"));

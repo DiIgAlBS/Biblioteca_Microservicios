@@ -34,38 +34,38 @@ public class LibroAssembler extends RepresentationModelAssemblerSupport<Libro, L
                 .categoriaId(entity.getCategoriaId())
                 .build();
         
-        // Agregar links HATEOAS
+     
         try {
-            // Link self (obtener este libro)
+   
             dto.add(linkTo(methodOn(LibroController.class)
                     .obtenerPorId(entity.getId()))
                     .withSelfRel());
             
-            // Link a todos los libros
+       
             dto.add(linkTo(methodOn(LibroController.class)
                     .obtenerTodos())
                     .withRel("libros"));
             
-            // Link a libros por autor
+
             if (entity.getAutorId() != null) {
                 dto.add(linkTo(methodOn(LibroController.class)
                         .obtenerPorAutor(entity.getAutorId()))
                         .withRel("libros-autor"));
             }
             
-            // Link a libros por editorial
+    
             if (entity.getEditorialId() != null) {
                 dto.add(linkTo(methodOn(LibroController.class)
                         .obtenerPorEditorial(entity.getEditorialId()))
                         .withRel("libros-editorial"));
             }
             
-            // Link para actualizar
+        
             dto.add(linkTo(methodOn(LibroController.class)
                     .actualizar(entity.getId(), null))
                     .withRel("actualizar"));
             
-            // Link para eliminar
+     
             dto.add(linkTo(methodOn(LibroController.class)
                     .eliminar(entity.getId()))
                     .withRel("eliminar"));

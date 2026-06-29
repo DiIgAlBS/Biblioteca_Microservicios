@@ -34,24 +34,24 @@ public class AutorAssembler extends RepresentationModelAssemblerSupport<Autor, A
                 .nacionalidad(entity.getNacionalidad())
                 .build();
         
-        // Agregar links HATEOAS
+
         try {
-            // Link self (obtener este autor)
+        
             dto.add(linkTo(methodOn(AutorController.class)
                     .obtenerPorId(entity.getId()))
                     .withSelfRel());
             
-            // Link a todos los autores
+           
             dto.add(linkTo(methodOn(AutorController.class)
                     .obtenerTodos())
                     .withRel("autores"));
             
-            // Link para actualizar
+         
             dto.add(linkTo(methodOn(AutorController.class)
                     .actualizar(entity.getId(), null))
                     .withRel("actualizar"));
             
-            // Link para eliminar
+        
             dto.add(linkTo(methodOn(AutorController.class)
                     .eliminar(entity.getId()))
                     .withRel("eliminar"));

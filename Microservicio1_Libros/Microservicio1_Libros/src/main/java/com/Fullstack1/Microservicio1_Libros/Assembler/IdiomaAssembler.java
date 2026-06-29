@@ -29,24 +29,24 @@ public class IdiomaAssembler extends RepresentationModelAssemblerSupport<Idioma,
                 .nombreIdioma(entity.getNombreIdioma())
                 .build();
         
-        // Agregar links HATEOAS
+   
         try {
-            // Link self (obtener este idioma)
+   
             dto.add(linkTo(methodOn(IdiomaController.class)
                     .obtenerPorId(entity.getId()))
                     .withSelfRel());
             
-            // Link a todos los idiomas
+      
             dto.add(linkTo(methodOn(IdiomaController.class)
                     .obtenerTodos())
                     .withRel("idiomas"));
             
-            // Link para actualizar
+         
             dto.add(linkTo(methodOn(IdiomaController.class)
                     .actualizar(entity.getId(), null))
                     .withRel("actualizar"));
             
-            // Link para eliminar
+      
             dto.add(linkTo(methodOn(IdiomaController.class)
                     .eliminar(entity.getId()))
                     .withRel("eliminar"));

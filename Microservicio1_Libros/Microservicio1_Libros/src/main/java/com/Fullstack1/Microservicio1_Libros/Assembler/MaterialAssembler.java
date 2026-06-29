@@ -32,38 +32,38 @@ public class MaterialAssembler extends RepresentationModelAssemblerSupport<Mater
                 .libroId(entity.getLibroId())
                 .build();
         
-        // Agregar links HATEOAS
+        
         try {
-            // Link self (obtener este material)
+    
             dto.add(linkTo(methodOn(MaterialController.class)
                     .obtenerPorId(entity.getId()))
                     .withSelfRel());
             
-            // Link a todos los materiales
+     
             dto.add(linkTo(methodOn(MaterialController.class)
                     .obtenerTodos())
                     .withRel("materiales"));
             
-            // Link a materiales por libro
+     
             if (entity.getLibroId() != null) {
                 dto.add(linkTo(methodOn(MaterialController.class)
                         .obtenerPorLibro(entity.getLibroId()))
                         .withRel("materiales-libro"));
             }
             
-            // Link a materiales por estado
+      
             if (entity.getEstado() != null) {
                 dto.add(linkTo(methodOn(MaterialController.class)
                         .obtenerPorEstado(entity.getEstado()))
                         .withRel("materiales-estado"));
             }
             
-            // Link para actualizar
+       
             dto.add(linkTo(methodOn(MaterialController.class)
                     .actualizar(entity.getId(), null))
                     .withRel("actualizar"));
             
-            // Link para eliminar
+     
             dto.add(linkTo(methodOn(MaterialController.class)
                     .eliminar(entity.getId()))
                     .withRel("eliminar"));

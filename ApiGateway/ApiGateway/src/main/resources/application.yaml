@@ -1,19 +1,19 @@
 server:
-  port: 8080 # El puerto estándar por donde entrará todo el tráfico de tu sistema
+  port: 8080 
 
 spring:
   application:
-    name: api-gateway # El nombre con el que se registrará en Eureka
+    name: api-gateway 
   cloud:
     gateway:
       routes:
-        # 📌 RUTA PARA EL MICROSERVICIO DE PRÉSTAMOS
+       
         - id: prestamos-service
-          uri: lb://MICROSERVICIO3_PRESTAMOS # 'lb://' significa Load Balancer (Eureka buscará este nombre)
+          uri: lb://MICROSERVICIO3_PRESTAMOS 
           predicates:
-            - Path=/api/prestamos/** # Cualquier petición que empiece con esto, irá a Préstamos
+            - Path=/api/prestamos/** 
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/ # Le dice al Gateway dónde está el Eureka para ir a registrarse
+      defaultZone: http://localhost:8761/eureka/ #
