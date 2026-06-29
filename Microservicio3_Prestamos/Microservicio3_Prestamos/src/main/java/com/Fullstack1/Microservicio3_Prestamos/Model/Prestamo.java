@@ -2,6 +2,7 @@ package com.Fullstack1.Microservicio3_Prestamos.Model;
 
 import java.time.LocalDate;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,42 +11,43 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data // @Data (Lombok) genera automáticamente por debajo los Getters, Setters, toString y constructores
-@AllArgsConstructor // @AllArgsConstructor (Lombok): Crea un constructor con todos los atributos de la clase
-@NoArgsConstructor // @NoArgsConstructor (Lombok): Crea un constructor vacío (obligatorio para que Spring trabaje bien)
-@Builder // @Builder (Lombok) habilita el patrón "Builder" para crear objetos de forma fluida paso a paso
-@Entity // Le dice a Hibernate que esta clase es una tabla de base de datos
-@Table(name = "prestamos") // Nombra la tabla explícitamente como "prestamos"
+@Data 
+@AllArgsConstructor 
+@NoArgsConstructor 
+@Builder 
+@Entity 
+@Table(name = "prestamos")
+@Schema(description = "Entidad que representa el préstamo de un libro de la biblioteca a un usuario específico")
 public class Prestamo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "ID autoincremental único del préstamo en la base de datos", example = "1")
     private Integer id;
 
-    @NotNull(message = "El ID del usuario es obligatorio")
-    @Column(nullable = false)
+    @Column(name = "usuario_id", nullable = false)
+    @Schema(description = "ID del usuario que solicita el préstamo (Microservicio de Usuarios)", example = "10")
     private Integer usuarioId;
 
-    @NotNull(message = "El ID del libro es obligatorio")
-    @Column(nullable = false)
+    @Column(name = "libro_id", nullable = false)
+    @Schema(description = "ID del libro prestado (Microservicio de Libros)", example = "45")
     private Integer libroId;
 
-    @NotNull(message = "La fecha de préstamo es obligatoria")
-    @Column(nullable = false)
+    @Column(name = "fecha_prestamo", nullable = false)
+    @Schema(description = "Fecha exacta en la que se realiza la entrega del libro")
     private LocalDate fechaPrestamo;
 
-    @NotNull(message = "La fecha de devolución es obligatoria")
-    @Column(nullable = false)
+    @Column(name = "fecha_devolucion", nullable = false)
+    @Schema(description = "Fecha límite establecida para que el usuario retorne el libro")
     private LocalDate fechaDevolucion;
 
-    @Enumerated(EnumType.STRING) // Obliga a Hibernate a guardar el texto literal del Enum (ej. "ACTIVO") en la base de datos, en lugar de su posición numérica (0, 1), evitando que la data se corrompa si agregamos nuevos estados
-    @Column(nullable = false)
-    private Estado_Prestamo estado;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false)
+    @Schema(description = "Estado actual del ciclo del préstamo (ACTIVO, DEVUELTO, ATRASADO)")
+    private EstadoPrestamo estado;
 }

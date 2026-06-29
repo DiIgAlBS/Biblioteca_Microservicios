@@ -2,22 +2,36 @@ package com.Fullstack1.Microservicio3_Prestamos.DTO;
 
 import java.time.LocalDate;
 
-import com.Fullstack1.Microservicio3_Prestamos.Model.Estado_Prestamo;
+import com.Fullstack1.Microservicio3_Prestamos.Model.EstadoPrestamo;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data // @Data (Lombok) genera automáticamente por debajo los Getters, Setters, toString y constructores
-@Builder // @Builder (Lombok) habilita el patrón "Builder" para crear objetos de forma fluida paso a paso
-@AllArgsConstructor // @AllArgsConstructor (Lombok): Crea un constructor con todos los atributos de la clase
-@NoArgsConstructor // @NoArgsConstructor (Lombok): Crea un constructor vacío (obligatorio para que Spring trabaje bien)
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Schema(description = "DTO que representa la respuesta completa de un Préstamo (Lectura)")
 public class PrestamoDTO {
+
+    @Schema(description = "ID único del préstamo", example = "1")
     private Integer id;
+
+    @Schema(description = "ID del usuario que solicitó el libro", example = "10")
     private Integer usuarioId;
+
+    @Schema(description = "ID del libro prestado", example = "45")
     private Integer libroId;
-    private LocalDate fechaPrestamo;
+
+    @Schema(description = "Fecha en la que el usuario retiró el libro", example = "2026-06-28")
+    private LocalDate fechaPrestamo; 
+
+    @Schema(description = "Fecha límite acordada para retornar el libro", example = "2026-07-05")
     private LocalDate fechaDevolucion;
-    private Estado_Prestamo estado; // Estado actual del préstamo (ej. ACTIVO, DEVUELTO, ATRASADO)
+
+    @Schema(description = "Estado actual del ciclo del préstamo", example = "ACTIVO")
+    private EstadoPrestamo estado;
 }
