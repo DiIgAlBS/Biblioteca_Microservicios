@@ -23,9 +23,6 @@ public class AutorController {
     
     private final AutorService autorService;
     
-    /**
-     * Obtiene todos los autores
-     */
     @GetMapping
     @Operation(summary = "Obtener todos los autores", description = "Retorna una lista de todos los autores registrados")
     public ResponseEntity<List<AutorDTO>> obtenerTodos() {
@@ -40,9 +37,6 @@ public class AutorController {
         }
     }
     
-    /**
-     * Obtiene un autor por ID
-     */
     @GetMapping("/{id}")
     @Operation(summary = "Obtener autor por ID", description = "Retorna un autor específico por su ID")
     public ResponseEntity<AutorDTO> obtenerPorId(
@@ -61,9 +55,6 @@ public class AutorController {
         }
     }
     
-    /**
-     * Busca autores por RUT
-     */
     @GetMapping("/rut/{rut}")
     @Operation(summary = "Buscar autor por RUT", description = "Retorna un autor específico por su RUT")
     public ResponseEntity<AutorDTO> obtenerPorRut(
@@ -82,9 +73,6 @@ public class AutorController {
         }
     }
     
-    /**
-     * Busca autores por nombre (búsqueda parcial)
-     */
     @GetMapping("/nombre/{nombre}")
     @Operation(summary = "Buscar autores por nombre", description = "Retorna una lista de autores que coincidan con el nombre")
     public ResponseEntity<List<AutorDTO>> buscarPorNombre(
@@ -100,9 +88,7 @@ public class AutorController {
         }
     }
     
-    /**
-     * Crea un nuevo autor
-     */
+    
     @PostMapping
     @Operation(summary = "Crear nuevo autor", description = "Crea un nuevo autor en el sistema")
     public ResponseEntity<AutorDTO> crear(
@@ -121,9 +107,6 @@ public class AutorController {
         }
     }
     
-    /**
-     * Actualiza un autor existente
-     */
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar autor", description = "Actualiza un autor existente por su ID")
     public ResponseEntity<AutorDTO> actualizar(
@@ -142,10 +125,7 @@ public class AutorController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
-    /**
-     * Elimina un autor
-     */
+  
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar autor", description = "Elimina un autor del sistema por su ID")
     public ResponseEntity<Void> eliminar(
